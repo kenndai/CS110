@@ -23,7 +23,9 @@ h2 {
 
 /* Button: NewGame and Reset */
 .new_game,
-.reset {
+.reset,
+.ai_game,
+.two_player {
 	text-align: center;
 	background-color: #ff8c00;
 	color: #000000;
@@ -32,7 +34,7 @@ h2 {
 	border-radius: 12px;
 	border: 1px solid gray;
 	display: block;
-	margin: 20px auto;
+	margin: 5px;
 }
 
 .new_game:hover,
@@ -51,6 +53,7 @@ h2 {
 .row {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .one,
