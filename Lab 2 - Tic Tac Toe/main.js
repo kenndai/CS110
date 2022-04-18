@@ -13,9 +13,11 @@ let allMoves = [
 	"eight",
 	"nine",
 ];
+
 playerTurn = document.querySelector(".display_player");
 playerOneScore = document.querySelector(".player-one-score");
 playerTwoScore = document.querySelector(".player-two-score");
+errorMsg = document.querySelector(".display_error");
 // gets all the DIRECT children of rows and adds a click event listener to them
 tiles = document.querySelectorAll(".row > div");
 playerTurn.innerHTML = `Player ${player}'s Turn`;
@@ -30,7 +32,9 @@ const playerTwo = {
 	moves: [],
 };
 
+// TODO CHeck for Draw
 window.onload = function () {
+	let timer = setInterval(outOfTime, 5000);
 	for (tile of tiles) tile.addEventListener("click", setXO);
 
 	function setXO(e) {
@@ -42,9 +46,11 @@ window.onload = function () {
 			return;
 		}
 
-		this.style.backgroundColor = "palevioletred";
+		clearInterval(timer);
 		turnNum++;
 		console.log(turnNum);
+		errorMsg.innerHTML = "";
+		this.style.backgroundColor = "palevioletred";
 
 		if (player === "One") {
 			// sets the tile as "X"
@@ -110,7 +116,14 @@ window.onload = function () {
 			}
 		}
 
+		if (turnNum === 9) {
+			console.log("Draw!");
+			playerTurn.innerHTML = "Draw!";
+			return;
+		}
+
 		playerTurn.innerHTML = `Player ${player}'s Turn`;
+		timer = setInterval(outOfTime, 5000);
 	}
 
 	// return true or false depending if a player won or not
@@ -186,6 +199,18 @@ window.onload = function () {
 		) {
 			console.log("win!");
 			return true;
+		}
+	}
+
+	function outOfTime() {
+		console.log("Time's Up! Your turn is skipped");
+		errorMsg.innerHTML = "Time's Up! Your turn is skipped";
+		if (player === "One") {
+			player = "Two";
+			playerTurn.innerHTML = `Player ${player}'s Turn`;
+		} else if (player === "Two") {
+			player = "One";
+			playerTurn.innerHTML = `Player ${player}'s Turn`;
 		}
 	}
 
