@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="index.css" />
+		<title>Twitter Lab</title>
+	</head>
+
+	<body>
+		<!-- TODO: scale twitter logo, push nav links closer to logo -->
+		<header>
+			<nav id="nav" class="container-fluid p-2" role="navigation">
+				<div class="row">
+					<div class="col d-flex justify-content-center">
+						<a class="link nav-item nav-link" href="#">Home</a>
+						<a class="link nav-item nav-link" href="#">Moments</a>
+						<a class="link nav-item nav-link" href="#"
+							>Notifications</a
+						>
+						<a class="link nav-item nav-link" href="#">Messages</a>
+						<a href="#tweet-container" class="skip-link"
+							>Jump to Tweets</a
+						>
+					</div>
+					<div class="col d-flex justify-content-center">
+						<img
+							src="./images/twitter-logo.png"
+							alt="Twitter Logo"
+							width="40"
+							height="32"
+						/>
+					</div>
+					<div class="col">
+						<div class="row">
+							<div class="col-6"></div>
+							<div class="col-6 d-flex justify-content-center">
+								<button
+									id="nav-tweet-btn"
+									class="btn rounded-pill"
+								>
+									Tweet
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</header>
+		<div id="wrapper" class="container-fluid">
+			<div class="row">
+				<div id="left" class="col">
+					<div class="profile-banner-wrapper">
+						<div class="image-stack">
+							<div class="image-stack-bottom">
+								<img
+									class="profile-banner"
+									src="./images/ratatouille-banner.png"
+									alt="User's twitter profile banner"
+								/>
+							</div>
+							<div class="image-stack-top">
+								<img
+									class="twitter-pfp"
+									src="./images/ratatouille.jpg"
+									alt="User's twitter profile picture"
+								/>
+							</div>
+						</div>
+					</div>
+					<div class="twitter-profile-wrapper">
+						<div class="twitter-profile-name">
+							<span id="twitter-name" class="tweet-author-name"
+								>Remy</span
+							>
+							<span id="twitter-handle" class="tweet-handle"
+								>@remy</span
+							>
+						</div>
+					</div>
+					<div class="twitter-stats">
+						<div class="tweet-count">
+							<span>Tweet</span>
+							<span class="count">5049</span>
+						</div>
+						<div class="tweet-following-count">
+							<span>Following</span>
+							<span class="count">324</span>
+						</div>
+						<div class="tweet-followercount">
+							<span>Followers</span>
+							<span class="count">809</span>
+						</div>
+					</div>
+				</div>
+				<div id="mid" class="col-5 px-0">
+					<div id="tweet-container" role="main">
+						<article class="tweet">
+							<div class="tweet-pfp-wrapper">
+								<img
+									class="tweet-pfp"
+									src="./images/ratatouille.jpg"
+									alt="Tweet author's profile picture"
+								/>
+							</div>
+							<div class="tweet-text">
+								<div class="tweet-author-wrapper">
+									<span class="tweet-author-name">Remy</span>
+									<span class="tweet-handle">@remy</span>
+									<span class="tweet-date">Nov 19</span>
+								</div>
+								<span class="tweet-content"
+									>I'm taking this class called CS 110 and the
+									TAs are all so <strong>cool!</strong></span
+								>
+							</div>
+						</article>
+						<article class="tweet">
+							<div class="tweet-pfp-wrapper">
+								<img
+									class="tweet-pfp"
+									src="./images/ratatouille.jpg"
+									alt="Tweet author's profile picture"
+								/>
+							</div>
+							<div class="tweet-text">
+								<div class="tweet-author-wrapper">
+									<span class="tweet-author-name">Remy</span>
+									<span class="tweet-handle">@remy</span>
+									<span class="tweet-date">Nov 19</span>
+								</div>
+								<span class="tweet-content"
+									>It's 2007. You just got home from
+									elementary school. Your mom has pizza bagels
+									in the oven. Ratatouille is in the theaters.
+									Life is good</span
+								>
+							</div>
+						</article>
+						<article class="tweet">
+							<div class="tweet-pfp-wrapper">
+								<img
+									class="tweet-pfp"
+									src="./images/ratatouille.jpg"
+									alt="Tweet author's profile picture"
+								/>
+							</div>
+							<div class="tweet-text">
+								<div class="tweet-author-wrapper">
+									<span class="tweet-author-name">Remy</span>
+									<span class="tweet-handle">@remy</span>
+									<span class="tweet-date">Nov 19</span>
+								</div>
+								<span class="tweet-content"
+									>Let's make some pasta</span
+								>
+							</div>
+						</article>
+						<article class="tweet">
+							<div class="tweet-pfp-wrapper">
+								<img
+									class="tweet-pfp"
+									src="./images/ratatouille.jpg"
+									alt="Tweet author's profile picture"
+								/>
+							</div>
+							<div class="tweet-text">
+								<div class="tweet-author-wrapper">
+									<span class="tweet-author-name">Remy</span>
+									<span class="tweet-handle">@remy</span>
+									<span class="tweet-date">Nov 19</span>
+								</div>
+								<span class="tweet-content"
+									>Let's make some pasta</span
+								>
+							</div>
+						</article>
+						<article class="tweet">
+							<div class="tweet-pfp-wrapper">
+								<img
+									class="tweet-pfp"
+									src="./images/ratatouille.jpg"
+									alt="Tweet author's profile picture"
+								/>
+							</div>
+							<div class="tweet-text">
+								<div class="tweet-author-wrapper">
+									<span class="tweet-author-name">Remy</span>
+									<span class="tweet-handle">@remy</span>
+									<span class="tweet-date">Nov 19</span>
+								</div>
+								<span class="tweet-content"
+									>Let's make some pasta</span
+								>
+							</div>
+						</article>
+					</div>
+				</div>
+				<div id="right" class="col">
+					<div id="suggested-wrapper" class="pb-3">
+						<div class="suggest-title-wrapper">
+							<span class="suggest-title">Who to Follow</span>
+						</div>
+						<article class="tweet">
+							<div class="tweet-pfp-wrapper">
+								<img
+									class="tweet-pfp"
+									src="./images/linguini.png"
+									alt="Suggested twitter account's profile picture"
+								/>
+							</div>
+							<div class="tweet-text">
+								<div class="tweet-author-wrapper">
+									<span class="tweet-author-name"
+										>Linguini</span
+									>
+									<span class="tweet-handle">@linguini</span>
+								</div>
+								<div>
+									<button class="btn follow-btn rounded-pill">
+										Follow
+									</button>
+								</div>
+							</div>
+						</article>
+						<article class="tweet">
+							<div class="tweet-pfp-wrapper">
+								<img
+									class="tweet-pfp"
+									src="./images/ratatouille.jpg"
+									alt="Suggested twitter account's profile picture"
+								/>
+							</div>
+							<div class="tweet-text">
+								<div class="tweet-author-wrapper">
+									<span class="tweet-author-name"
+										>CS110 TA</span
+									>
+									<span class="tweet-handle">@cs</span>
+								</div>
+								<div>
+									<button class="btn follow-btn rounded-pill">
+										Follow
+									</button>
+								</div>
+							</div>
+						</article>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

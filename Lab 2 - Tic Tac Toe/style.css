@@ -22,10 +22,7 @@ h2 {
 }
 
 /* Button: NewGame and Reset */
-.new_game,
-.reset,
-.ai_game,
-.two_player {
+button {
 	text-align: center;
 	background-color: #ff8c00;
 	color: #000000;
@@ -37,8 +34,7 @@ h2 {
 	margin: 5px;
 }
 
-.new_game:hover,
-.reset {
+button:hover {
 	background-color: orange;
 }
 
@@ -56,15 +52,7 @@ h2 {
 	justify-content: center;
 }
 
-.one,
-.two,
-.three,
-.four,
-.five,
-.six,
-.seven,
-.eight,
-.nine {
+.row > div {
 	flex-grow: 1;
 	width: 100px;
 	background-color: pink;

@@ -1,12 +1,26 @@
 let turnNum = 0;
-let gameOver = 0;
+let gameOver = false;
 let player = "One";
 let ai = false;
-let allMoves = ['one','two','three','four','five','six','seven','eight','nine'];
+let allMoves = [
+	"one",
+	"two",
+	"three",
+	"four",
+	"five",
+	"six",
+	"seven",
+	"eight",
+	"nine",
+];
+
 playerTurn = document.querySelector(".display_player");
-playerTurn.innerHTML = `Player ${player}`;
+playerOneScore = document.querySelector(".player-one-score");
+playerTwoScore = document.querySelector(".player-two-score");
+errorMsg = document.querySelector(".display_error");
 // gets all the DIRECT children of rows and adds a click event listener to them
 tiles = document.querySelectorAll(".row > div");
+playerTurn.innerHTML = `Player ${player}'s Turn`;
 
 const playerOne = {
 	score: 0,
@@ -18,48 +32,70 @@ const playerTwo = {
 	moves: [],
 };
 
+// TODO CHeck for Draw
 window.onload = function () {
-	for (tile of tiles) {
-		tile.addEventListener("click", setXO);
-	}
+	let timer = setInterval(outOfTime, 5000);
+	for (tile of tiles) tile.addEventListener("click", setXO);
 
 	function setXO(e) {
 		console.log(`CLICKED ${this.className}`);
 
 		// if a tile has already been set don't let it be set again
-		if (this.firstChild.innerHTML != "" || gameOver === 1) {
+		if (this.firstChild.innerHTML != "" || gameOver === true) {
 			e.preventDefault();
 			return;
 		}
 
+		clearInterval(timer);
 		turnNum++;
 		console.log(turnNum);
+		errorMsg.innerHTML = "";
+		this.style.backgroundColor = "palevioletred";
 
 		if (player === "One") {
 			// sets the tile as "X"
 			this.firstChild.innerHTML = "X";
-			if(!ai){
-				player = "Two";
-			}
+			if (!ai) player = "Two";
+
 			// pushes the tile number into that player's "move" array
 			playerOne.moves.push(this.className);
 			console.log(playerOne.moves);
-			
-			//ai 
-			if(ai){
-				//gets the remaining moves by filtering the total moves by the moves made by player one and player two
-				remainingMoves = allMoves.filter(item => !(playerOne.moves).includes(item)).filter(item => !(playerTwo.moves).includes(item));
-				if(!remainingMoves == []){
-					newMove = remainingMoves[Math.floor(Math.random()*remainingMoves.length)];
-					ai_move = document.querySelector("."+newMove);
-					ai_move.firstChild.innerHTML = "O";
-					playerTwo.moves.push(newMove);
-					isWin(playerTwo.moves);
-				}
 
+			//ai
+			if (ai) {
+				//gets the remaining moves by filtering the total moves by the moves made by player one and player two
+				remainingMoves = allMoves
+					.filter(item => !playerOne.moves.includes(item))
+					.filter(item => !playerTwo.moves.includes(item));
+				if (remainingMoves.length !== 0) {
+					newMove =
+						remainingMoves[
+							Math.floor(Math.random() * remainingMoves.length)
+						];
+					ai_move = document.querySelector("." + newMove);
+					ai_move.firstChild.innerHTML = "O";
+					ai_move.style.backgroundColor = "palevioletred";
+					playerTwo.moves.push(newMove);
+					if (isWin(playerTwo.moves)) {
+						console.log("Player Two Wins!");
+						playerTwo.score++;
+						playerTwoScore.innerHTML = `${playerTwo.score} `;
+						playerTurn.innerHTML = "Player Two Wins!";
+						gameOver = true;
+						return;
+					}
+				}
 			}
+
 			// check if player won after placing the tile
-			isWin(playerOne.moves);
+			if (isWin(playerOne.moves)) {
+				console.log("Player One Wins!");
+				playerOne.score++;
+				playerOneScore.innerHTML = `${playerOne.score} `;
+				playerTurn.innerHTML = "Player One Wins!";
+				gameOver = true;
+				return;
+			}
 		} else if (player === "Two") {
 			// sets the tile as "O"
 			this.firstChild.innerHTML = "O";
@@ -70,10 +106,24 @@ window.onload = function () {
 			console.log(playerTwo.moves);
 
 			// check if player won after placing the tile
-			isWin(playerTwo.moves);
+			if (isWin(playerTwo.moves)) {
+				console.log("Player Two Wins!");
+				playerTwo.score++;
+				playerTwoScore.innerHTML = `${playerTwo.score} `;
+				playerTurn.innerHTML = "Player Two Wins!";
+				gameOver = true;
+				return;
+			}
 		}
 
-		playerTurn.innerHTML = `Player ${player}`;
+		if (turnNum === 9) {
+			console.log("Draw!");
+			playerTurn.innerHTML = "Draw!";
+			return;
+		}
+
+		playerTurn.innerHTML = `Player ${player}'s Turn`;
+		timer = setInterval(outOfTime, 5000);
 	}
 
 	// return true or false depending if a player won or not
@@ -84,84 +134,112 @@ window.onload = function () {
 		3 6 9
 		*/
 		//horizontal wins
-		if(moves.includes('one') && (moves.includes('four') && moves.includes('seven'))){
-			console.log('win!');
+		if (
+			moves.includes("one") &&
+			moves.includes("four") &&
+			moves.includes("seven")
+		) {
+			console.log("win!");
 			return true;
 		}
-		if(moves.includes('two') && (moves.includes('five') && moves.includes('eight'))){
-			console.log('win!');
+		if (
+			moves.includes("two") &&
+			moves.includes("five") &&
+			moves.includes("eight")
+		) {
+			console.log("win!");
+			return true;
 		}
-		if(moves.includes('three') && (moves.includes('six') && moves.includes('nine'))){
-			console.log('win!');
+		if (
+			moves.includes("three") &&
+			moves.includes("six") &&
+			moves.includes("nine")
+		) {
+			console.log("win!");
 			return true;
 		}
 		//vertical wins
-		if(moves.includes('one') && (moves.includes('two') && moves.includes('three'))){
-			console.log('win!');
+		if (
+			moves.includes("one") &&
+			moves.includes("two") &&
+			moves.includes("three")
+		) {
+			console.log("win!");
 			return true;
 		}
-		if(moves.includes('four') && (moves.includes('five') && moves.includes('six'))){
-			console.log('win!');
+		if (
+			moves.includes("four") &&
+			moves.includes("five") &&
+			moves.includes("six")
+		) {
+			console.log("win!");
 			return true;
 		}
-		if(moves.includes('seven') && (moves.includes('eight') && moves.includes('nine'))){
-			console.log('win!');
+		if (
+			moves.includes("seven") &&
+			moves.includes("eight") &&
+			moves.includes("nine")
+		) {
+			console.log("win!");
 			return true;
 		}
 		//diagonal wins
-		if(moves.includes('one') && (moves.includes('five') && moves.includes('nine'))){
-			console.log('win!');
+		if (
+			moves.includes("one") &&
+			moves.includes("five") &&
+			moves.includes("nine")
+		) {
+			console.log("win!");
 			return true;
 		}
-		if(moves.includes('three') && (moves.includes('five') && moves.includes('seven'))){
-			console.log('win!');
+		if (
+			moves.includes("three") &&
+			moves.includes("five") &&
+			moves.includes("seven")
+		) {
+			console.log("win!");
 			return true;
 		}
-
 	}
 
-	document.querySelector(".new_game").addEventListener("click", () => {
-		ai = false;
-		turnNum = 0;
-		for (tile of tiles) tile.firstChild.innerHTML = "";
-		player = "One";
-		playerTurn.innerHTML = `Player ${player}`;
-		playerOne.moves = [];
-		playerTwo.moves = [];
+	function outOfTime() {
+		console.log("Time's Up! Your turn is skipped");
+		errorMsg.innerHTML = "Time's Up! Your turn is skipped";
+		if (player === "One") {
+			player = "Two";
+			playerTurn.innerHTML = `Player ${player}'s Turn`;
+		} else if (player === "Two") {
+			player = "One";
+			playerTurn.innerHTML = `Player ${player}'s Turn`;
+		}
+	}
+
+	document.querySelector(".new_game").addEventListener("click", newGame);
+	document.querySelector(".two_player").addEventListener("click", newGame);
+	document.querySelector(".ai_game").addEventListener("click", () => {
+		console.log("ai_game click");
+		newGame();
+		ai = true;
 	});
 	document.querySelector(".reset").addEventListener("click", () => {
-		ai = false;
-		turnNum = 0;
-		for (tile of tiles) tile.firstChild.innerHTML = "";
-		player = "One";
-		playerTurn.innerHTML = `Player ${player}`;
+		newGame();
 		playerOne.score = 0;
 		playerTwo.score = 0;
-		playerOne.moves = [];
-		playerTwo.moves = [];
+		playerOneScore.innerHTML = "0 ";
+		playerTwoScore.innerHTML = "0";
 	});
-	document.querySelector(".ai_game").addEventListener("click",()=>{
-		console.log("ai_game click");
-		ai = true;
-		turnNum = 0;
-		for (tile of tiles) tile.firstChild.innerHTML = "";
-		player = "One";
-		playerTurn.innerHTML = `Player ${player}`;
-		playerOne.score = 0;
-		playerTwo.score = 0;
-		playerOne.moves = [];
-		playerTwo.moves = [];
-	})
-	document.querySelector(".two_player").addEventListener("click",()=>{
-		console.log("two player");
+
+	function newGame() {
+		gameOver = false;
 		ai = false;
 		turnNum = 0;
-		for (tile of tiles) tile.firstChild.innerHTML = "";
+		for (tile of tiles) {
+			tile.firstChild.innerHTML = "";
+			tile.style.backgroundColor = "pink";
+		}
 		player = "One";
-		playerTurn.innerHTML = `Player ${player}`;
-		playerOne.score = 0;
-		playerTwo.score = 0;
+		playerTurn.innerHTML = `Player ${player}'s Turn`;
 		playerOne.moves = [];
 		playerTwo.moves = [];
-	})
+	}
 };

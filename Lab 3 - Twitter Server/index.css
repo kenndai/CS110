@@ -1,0 +1,216 @@
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	margin: 0;
+	background-color: #e6ecf0;
+	min-width: 950px;
+}
+
+#nav {
+	background-color: white;
+	position: sticky;
+	top: 0;
+	left: 0;
+	z-index: 100;
+}
+
+.link {
+	color: #657786;
+	font-weight: 700;
+}
+
+.link:hover {
+	color: #1da1f2;
+	margin-bottom: -3px;
+	border-bottom: 3px solid #1da1f2;
+}
+
+.skip-link {
+	display: none;
+}
+
+#nav-tweet-btn {
+	background-color: #1da1f2;
+	color: white;
+	font-weight: 750;
+}
+
+#wrapper {
+	max-width: 1190px;
+	margin: 1em auto;
+}
+
+#left {
+	display: flex;
+	flex-direction: column;
+}
+
+.profile-banner-wrapper {
+	background-color: black;
+	display: flex;
+	justify-content: center;
+	padding: 10px 30px;
+}
+
+.profile-banner {
+	width: 270px;
+	height: 45px;
+	margin: 20px 0px;
+}
+
+.twitter-profile-wrapper {
+	background-color: white;
+	display: flex;
+	justify-content: center;
+	padding: 0px 20px;
+}
+
+.twitter-pfp {
+	width: 72px;
+	height: 72px;
+	border-radius: 50%;
+	border: 2.5px solid white;
+	position: absolute;
+	top: 145px;
+}
+
+/* .image-stack {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	position: relative;
+}
+
+.image-stack-top {
+	grid-column: 1;
+	grid-row: 1;
+	padding-top: 20%;
+	z-index: 1;
+}
+
+.image-stack-bottom {
+	grid-column: 1;
+	grid-row: 1;
+} */
+
+.twitter-profile-name {
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 12px 20px;
+}
+
+.twitter-stats {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	background-color: white;
+}
+
+.twitter-stats div {
+	color: #657786;
+	display: flex;
+	flex-direction: column;
+	font-weight: 700;
+	padding: 12px;
+}
+
+.twitter-stats span {
+	margin: 6px 0px;
+}
+
+.twitter-stats .count {
+	color: #1da1f2;
+}
+
+#mid {
+	display: flex;
+	flex-direction: column;
+	flex-shrink: 0;
+}
+
+.tweet {
+	background-color: white;
+	border-bottom: 1px solid #e6ecf0;
+	min-height: 51px;
+	display: flex;
+	flex-direction: row;
+	flex-shrink: 0;
+	padding: 12px;
+}
+
+.tweet-pfp-wrapper {
+	margin-right: 12px;
+}
+
+.tweet-pfp {
+	border-radius: 50%;
+	width: 48px;
+	height: 48px;
+}
+
+.tweet-text {
+	display: flex;
+	flex-direction: column;
+	font-size: 15px;
+}
+
+.tweet-author-name {
+	color: rgb(15, 20, 25);
+	font-weight: 700;
+}
+
+#twitter-name {
+	text-decoration: underline;
+}
+
+.tweet-handle {
+	color: rgb(113, 118, 123);
+}
+
+.tweet-date {
+	color: rgb(113, 118, 123);
+}
+
+.tweet-content {
+	font-weight: 400;
+}
+
+#suggested-wrapper {
+	background-color: white;
+}
+
+.suggest-title-wrapper {
+	background-color: white;
+	min-height: 51px;
+	display: flex;
+	align-items: center;
+	padding: 12px;
+}
+
+.suggest-title {
+	font-weight: 700;
+	font-size: 1.25rem;
+}
+
+.follow-btn {
+	color: #1da1f2;
+	border-color: #1da1f2;
+	background-color: white;
+	font-weight: 700;
+}
+
+@media (max-width: 1200px) {
+	.row {
+		display: flex;
+		justify-content: center;
+	}
+	#left {
+		max-width: 354px;
+	}
+	#mid {
+		min-width: 495.828px;
+	}
+	#right {
+		display: none;
+	}
+}
