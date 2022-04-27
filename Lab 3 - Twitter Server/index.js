@@ -99,6 +99,6 @@ const displayTweets = async () => {
 		tweetEl.append(pfpWrapperEl, tweetTextEl);
 		pfpWrapperEl.appendChild(pfpEl);
 		tweetTextEl.append(authWrapperEl, tweetContentEl);
-		authWrapperEl.append(authorName, tweetHandle);
+		authWrapperEl.append(authorName, tweetHandle,tweetDate);
 	}
 };
