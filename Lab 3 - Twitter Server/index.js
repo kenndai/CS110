@@ -3,7 +3,7 @@ const url =
 
 async function getTweets() {
 	const res = await axios.get(url);
-	return res.data.statuses;
+	return res;
 }
 
 //not extensively tested, might have bugs
@@ -99,7 +99,8 @@ function refreshTweets() {
 }
 
 const displayTweets = async () => {
-	const tweets = await getTweets();
+	const res = await getTweets();
+	tweets = tweets.data.statuses;
 	console.log(tweets);
 	const tweetContainer = document.getElementById("tweet-container");
 	for (tweet of tweets) {
