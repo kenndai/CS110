@@ -100,7 +100,7 @@ function refreshTweets() {
 
 const displayTweets = async () => {
 	const res = await getTweets();
-	tweets = tweets.data.statuses;
+	tweets = res.data.statuses;
 	console.log(tweets);
 	const tweetContainer = document.getElementById("tweet-container");
 	for (tweet of tweets) {
