@@ -1,3 +1,4 @@
+var searchString = "weather";
 const url =
 	"http://ec2-18-209-247-77.compute-1.amazonaws.com:3000/feed/random?q=weather";
 
@@ -7,16 +8,15 @@ async function getTweets() {
 }
 
 //not extensively tested, might have bugs
-function removeDuplicates(data) {
+function removeDuplicates(tweets) {
 	let tweetIds = [];
 	let newData = [];
-	for (const i in data.statuses) {
-		tweetIds.push(data.statuses[i].id);
+	for (let i = 0; i < tweets.length; i++) {
+		tweetIds.push(tweets[i].id);
 	}
-	tweetIds.filter(onlyUnique);
-	for (let i = 0; i < data.statuses.length; i++) {
-		if (tweetIds.includes(data.statuses[i].id)) {
-			newData.push(data.statuses[i]);
+	for (let i = 0; i < tweets.length; i++) {
+		if (tweetIds.includes(tweets[i].id)) {
+			newData.push(tweets[i]);
 		} else {
 			console.log("duplicate, nuke time");
 			data.statuses.splice(i, 1);
@@ -40,68 +40,27 @@ function textFilter(tweets) {
 	}
 	return spliceList;
 }
-
-function refreshTweets() {
+function sortDate(tweets){
+	tweets.sort((a,b)=>(a.created_at > b.created_at)?1:-1)
+	sortedTweets = tweets;
+	console.log(sortedTweets)
+	return sortedTweets;
+}
+async function refreshTweets() {
 	// feel free to use a more complicated heuristics like in-place-patch, for simplicity, we will clear all tweets and append all tweets back
 	// {@link https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript}
-	// while (tweetContainer.firstChild) {
-	//     tweetContainer.removeChild(tweetContainer.firstChild);
-	// }
-	getTweets()
-		.then(data => {
-			const tweetList = document.createElement("ul");
-			//things in tweet needed:
-			//tweet_id, username, tweet text
-			// {@link https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement}
-			// append the tweetList to the tweetContainer
-			// {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild}
-			tweetContainer.appendChild(tweetList);
-			// all tweet objects (no duplicates) stored in tweets variable
-			tweets = removeDuplicates(data);
-			filteredResult = textFilter(tweets);
-			// filter on search text
-			// {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter}
-			// create an unordered list to hold the tweets
-
-			// filteredResult = tweets.filter(searchString);
-			// sort by date
-			// {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort}
-			let earliestDate = new Date("2011-09-26T12:10:46+00:00");
-			console.log(earliestDate);
-			for (const i in tweets) {
-				if (tweets[i].created_at < earliestDate) {
-					console.log("date is lit");
-				}
-			}
-			// console.log(sortedResult);
-			// execute the arrow function for each tweet
-			// {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach}
-			// sortedResult.forEach(tweetObject => {
-			//     // create a container for individual tweet
-			//     const tweet = document.createElement("li");
-
-			//     // e.g. create a div holding tweet content
-			//     const tweetContent = document.createElement("div");
-			//     // create a text node "safely" with HTML characters escaped
-			//     // {@link https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode}
-			//     const tweetText = document.createTextNode(tweetObject.text);
-			//     // append the text node to the div
-			//     tweetContent.appendChild(tweetText);
-
-			//     // you may want to put more stuff here like time, username...
-			//     tweet.appendChild(tweetContent);
-
-			//     // finally append your tweet into the tweet list
-			//     tweetList.appendChild(tweet);
-			// });
-		})
-		.catch(err => console.log("rejected:", err.message));
+	while (tweetContainer.firstChild) {
+	    tweetContainer.removeChild(tweetContainer.firstChild);
+	}
 }
 
 const displayTweets = async () => {
 	const res = await getTweets();
 	tweets = res.data.statuses;
 	console.log(tweets);
+	tweets = removeDuplicates(tweets);
+	tweets = textFilter(tweets);
+	tweets = sortDate(tweets);
 	const tweetContainer = document.getElementById("tweet-container");
 	for (tweet of tweets) {
 		let tweetEl = document.createElement("article");
@@ -120,10 +79,14 @@ const displayTweets = async () => {
 
 		let authorName = document.createElement("span");
 		let tweetHandle = document.createElement("span");
+		let tweetDate = document.createElement("span");
 		authorName.className = "tweet-author-name";
 		authorName.innerText = `${tweet.user.name} `;
 		tweetHandle.className = "tweet-handle";
 		tweetHandle.innerText = `@${tweet.user.screen_name}`;
+		tweetDate.className = "tweet-date";
+		console.log(tweet.created_at);
+		tweetDate.innerText =`test ${tweet.created_at}`;
 
 		// tweet text
 		let tweetTextEl = document.createElement("div");
