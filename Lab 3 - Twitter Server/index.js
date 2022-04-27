@@ -1,16 +1,35 @@
-var searchString = "weather";
+let searchString = "";
 const url =
 	"http://ec2-18-209-247-77.compute-1.amazonaws.com:3000/feed/random?q=weather";
+let timer;
 
 const userTweetTemplate = document.querySelector("[data-user-tweet]");
+const searchForm = document.getElementById("search-form");
 const searchBar = document.getElementById("search-bar");
+const startBtn = document.getElementById("start-poll");
+const stopBtn = document.getElementById("stop-poll");
+
+searchForm.addEventListener("submit", e => {
+	e.preventDefault();
+	searchString = searchBar.value.trim().toLowerCase();
+	console.log(searchString);
+});
+
+startBtn.addEventListener("click", () => {
+	displayTweets();
+	timer = setInterval(displayTweets, 10000);
+	console.log("set interval");
+});
+
+stopBtn.addEventListener("click", () => {
+	clearInterval(timer);
+	console.log("cleared interval");
+});
 
 async function getTweets() {
 	const res = await axios.get(url);
 	return res;
 }
-
-searchBar.addEventListener(onsubmit, e => console.log("submitted"));
 
 //not extensively tested, might have bugs
 function removeDuplicates(tweets) {
@@ -39,9 +58,7 @@ function onlyUnique(value, index, self) {
 function textFilter(tweets) {
 	let spliceList = [];
 	for (let i = 0; i < tweets.length; i++) {
-		if (tweets[i].text.includes(searchString)) {
-			spliceList.push(tweets[i]);
-		}
+		if (tweets[i].text.includes(searchString)) spliceList.push(tweets[i]);
 	}
 	return spliceList;
 }
@@ -61,7 +78,7 @@ async function refreshTweets() {
 	}
 }
 
-const displayTweets = async () => {
+async function displayTweets() {
 	const res = await getTweets();
 	tweets = res.data.statuses;
 	console.log(tweets);
@@ -81,4 +98,4 @@ const displayTweets = async () => {
 		tweetContent.innerText = tweet.text;
 		tweetContainer.appendChild(newTweet);
 	}
-};
+}

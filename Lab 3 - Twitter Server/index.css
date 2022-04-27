@@ -44,6 +44,10 @@ body {
 	flex-direction: column;
 }
 
+#polling-buttons {
+	padding-top: 10px;
+}
+
 .profile-banner-wrapper {
 	background-color: black;
 	display: flex;
