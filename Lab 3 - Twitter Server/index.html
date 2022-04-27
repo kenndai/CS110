@@ -45,18 +45,14 @@
 							height="32"
 						/>
 					</div>
-					<div class="col">
-						<div class="row">
-							<div class="col-6"></div>
-							<div class="col-6 d-flex justify-content-center">
-								<button
-									id="nav-tweet-btn"
-									class="btn rounded-pill"
-								>
-									Tweet
-								</button>
-							</div>
-						</div>
+					<div class="col-3 d-flex justify-content-end">
+						<input
+							id="search-bar"
+							type="search"
+							class="form-control"
+							placeholder="Search in tweets"
+						/>
+						<button></button>
 					</div>
 				</div>
 			</nav>
@@ -109,105 +105,27 @@
 				</div>
 				<div id="mid" class="col-5 px-0">
 					<div id="tweet-container" role="main">
-						<article class="tweet">
-							<div class="tweet-pfp-wrapper">
-								<img
-									class="tweet-pfp"
-									src="./images/ratatouille.jpg"
-									alt="Tweet author's profile picture"
-								/>
-							</div>
-							<div class="tweet-text">
-								<div class="tweet-author-wrapper">
-									<span class="tweet-author-name">Remy</span>
-									<span class="tweet-handle">@remy</span>
-									<span class="tweet-date">Nov 19</span>
+						<template data-user-tweet>
+							<article class="tweet">
+								<div class="tweet-pfp-wrapper">
+									<img
+										class="tweet-pfp"
+										src=""
+									/>
 								</div>
-								<span class="tweet-content"
-									>I'm taking this class called CS 110 and the
-									TAs are all so <strong>cool!</strong></span
-								>
-							</div>
-						</article>
-						<article class="tweet">
-							<div class="tweet-pfp-wrapper">
-								<img
-									class="tweet-pfp"
-									src="./images/ratatouille.jpg"
-									alt="Tweet author's profile picture"
-								/>
-							</div>
-							<div class="tweet-text">
-								<div class="tweet-author-wrapper">
-									<span class="tweet-author-name">Remy</span>
-									<span class="tweet-handle">@remy</span>
-									<span class="tweet-date">Nov 19</span>
+								<div class="tweet-text">
+									<div class="tweet-author-wrapper">
+										<span class="tweet-author-name"
+											></span
+										>
+										<span class="tweet-handle"></span>
+										<span class="tweet-date"></span>
+									</div>
+									<span class="tweet-content"
+									>
 								</div>
-								<span class="tweet-content"
-									>It's 2007. You just got home from
-									elementary school. Your mom has pizza bagels
-									in the oven. Ratatouille is in the theaters.
-									Life is good</span
-								>
-							</div>
-						</article>
-						<article class="tweet">
-							<div class="tweet-pfp-wrapper">
-								<img
-									class="tweet-pfp"
-									src="./images/ratatouille.jpg"
-									alt="Tweet author's profile picture"
-								/>
-							</div>
-							<div class="tweet-text">
-								<div class="tweet-author-wrapper">
-									<span class="tweet-author-name">Remy</span>
-									<span class="tweet-handle">@remy</span>
-									<span class="tweet-date">Nov 19</span>
-								</div>
-								<span class="tweet-content"
-									>Let's make some pasta</span
-								>
-							</div>
-						</article>
-						<article class="tweet">
-							<div class="tweet-pfp-wrapper">
-								<img
-									class="tweet-pfp"
-									src="./images/ratatouille.jpg"
-									alt="Tweet author's profile picture"
-								/>
-							</div>
-							<div class="tweet-text">
-								<div class="tweet-author-wrapper">
-									<span class="tweet-author-name">Remy</span>
-									<span class="tweet-handle">@remy</span>
-									<span class="tweet-date">Nov 19</span>
-								</div>
-								<span class="tweet-content"
-									>Let's make some pasta</span
-								>
-							</div>
-						</article>
-						<article class="tweet">
-							<div class="tweet-pfp-wrapper">
-								<img
-									class="tweet-pfp"
-									src="./images/ratatouille.jpg"
-									alt="Tweet author's profile picture"
-								/>
-							</div>
-							<div class="tweet-text">
-								<div class="tweet-author-wrapper">
-									<span class="tweet-author-name">Remy</span>
-									<span class="tweet-handle">@remy</span>
-									<span class="tweet-date">Nov 19</span>
-								</div>
-								<span class="tweet-content"
-									>Let's make some pasta</span
-								>
-							</div>
-						</article>
+							</article>
+						</template>
 					</div>
 				</div>
 				<div id="right" class="col">

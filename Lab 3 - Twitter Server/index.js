@@ -1,10 +1,15 @@
 const url =
 	"http://ec2-18-209-247-77.compute-1.amazonaws.com:3000/feed/random?q=weather";
 
+const userTweetTemplate = document.querySelector("[data-user-tweet]");
+const searchBar = document.getElementById("search-bar");
+
 async function getTweets() {
 	const res = await axios.get(url);
 	return res;
 }
+
+searchBar.addEventListener(onsubmit, e => console.log("submitted"));
 
 //not extensively tested, might have bugs
 function removeDuplicates(data) {
@@ -104,38 +109,15 @@ const displayTweets = async () => {
 	console.log(tweets);
 	const tweetContainer = document.getElementById("tweet-container");
 	for (tweet of tweets) {
-		let tweetEl = document.createElement("article");
-		tweetEl.className = "tweet";
-
-		// tweet pfp
-		let pfpWrapperEl = document.createElement("div");
-		let pfpEl = document.createElement("img");
-		pfpWrapperEl.className = "tweet-pfp-wrapper";
-		pfpEl.className = "tweet-pfp";
-		pfpEl.src = tweet.user.profile_image_url;
-
-		// tweet author
-		let authWrapperEl = document.createElement("div");
-		authWrapperEl.className = "tweet-author-wrapper";
-
-		let authorName = document.createElement("span");
-		let tweetHandle = document.createElement("span");
-		authorName.className = "tweet-author-name";
+		const newTweet = userTweetTemplate.content.cloneNode(true).children[0];
+		let pfp = newTweet.querySelector(".tweet-pfp");
+		pfp.src = tweet.user.profile_image_url;
+		let authorName = newTweet.querySelector(".tweet-author-name");
 		authorName.innerText = `${tweet.user.name} `;
-		tweetHandle.className = "tweet-handle";
+		let tweetHandle = newTweet.querySelector(".tweet-handle");
 		tweetHandle.innerText = `@${tweet.user.screen_name}`;
-
-		// tweet text
-		let tweetTextEl = document.createElement("div");
-		let tweetContentEl = document.createElement("span");
-		tweetTextEl.className = "tweet-text";
-		tweetContentEl.className = "tweet-content";
-		tweetContentEl.innerText = tweet.text;
-
-		tweetContainer.appendChild(tweetEl);
-		tweetEl.append(pfpWrapperEl, tweetTextEl);
-		pfpWrapperEl.appendChild(pfpEl);
-		tweetTextEl.append(authWrapperEl, tweetContentEl);
-		authWrapperEl.append(authorName, tweetHandle);
+		let tweetContent = newTweet.querySelector(".tweet-content");
+		tweetContent.innerText = tweet.text;
+		tweetContainer.appendChild(newTweet);
 	}
 };
