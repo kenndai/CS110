@@ -40,12 +40,14 @@ function textFilter(tweets) {
 	}
 	return spliceList;
 }
+
 function sortDate(tweets){
 	tweets.sort((a,b)=>(a.created_at > b.created_at)?1:-1)
 	sortedTweets = tweets;
 	console.log(sortedTweets)
 	return sortedTweets;
 }
+
 async function refreshTweets() {
 	// feel free to use a more complicated heuristics like in-place-patch, for simplicity, we will clear all tweets and append all tweets back
 	// {@link https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript}
