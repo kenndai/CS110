@@ -48,6 +48,16 @@ body {
 	padding-top: 10px;
 }
 
+#start-poll {
+	background-color: rgb(119, 210, 105);
+	border: 1px rgb(119, 210, 105);
+}
+
+#stop-poll {
+	background-color: rgb(220, 98, 98);
+	border: 1px rgb(220, 98, 98);
+}
+
 .profile-banner-wrapper {
 	background-color: black;
 	display: flex;

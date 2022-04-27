@@ -1,34 +1,68 @@
-let searchString = "";
 const url =
 	"http://ec2-18-209-247-77.compute-1.amazonaws.com:3000/feed/random?q=weather";
+const tweets = [];
 let timer;
+let searchString = "";
 
+const tweetContainer = document.getElementById("tweet-container");
 const userTweetTemplate = document.querySelector("[data-user-tweet]");
 const searchForm = document.getElementById("search-form");
 const searchBar = document.getElementById("search-bar");
 const startBtn = document.getElementById("start-poll");
 const stopBtn = document.getElementById("stop-poll");
 
+// sets searchString according to user input
 searchForm.addEventListener("submit", e => {
 	e.preventDefault();
 	searchString = searchBar.value.trim().toLowerCase();
 	console.log(searchString);
 });
 
+// call displayTweets then begin 10sec polling interval
 startBtn.addEventListener("click", () => {
 	displayTweets();
 	timer = setInterval(displayTweets, 10000);
 	console.log("set interval");
 });
 
+// clear interval upon button click
 stopBtn.addEventListener("click", () => {
 	clearInterval(timer);
 	console.log("cleared interval");
 });
 
+// uses axios to fetch tweets
+// pushes fetched tweets into global tweets array
 async function getTweets() {
-	const res = await axios.get(url);
-	return res;
+	try {
+		const res = await axios.get(url);
+		tweets.push(...res.data.statuses);
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+// should first remove all tweets, i.e refreshTweets()
+// for all tweets that match that query, create a tweet and display
+async function displayTweets() {
+	refreshTweets();
+	await getTweets();
+	removeDuplicates(tweets);
+	textFilter(tweets);
+	sortDate(tweets);
+	for (tweet of tweets) {
+		// clone the tweet template and modify attributes
+		const newTweet = userTweetTemplate.content.cloneNode(true).children[0];
+		let pfp = newTweet.querySelector(".tweet-pfp");
+		pfp.src = tweet.user.profile_image_url;
+		let authorName = newTweet.querySelector(".tweet-author-name");
+		authorName.innerText = `${tweet.user.name} `;
+		let tweetHandle = newTweet.querySelector(".tweet-handle");
+		tweetHandle.innerText = `@${tweet.user.screen_name}`;
+		let tweetContent = newTweet.querySelector(".tweet-content");
+		tweetContent.innerText = tweet.text;
+		tweetContainer.appendChild(newTweet);
+	}
 }
 
 //not extensively tested, might have bugs
@@ -46,7 +80,7 @@ function removeDuplicates(tweets) {
 			data.statuses.splice(i, 1);
 		}
 	}
-	console.log(newData);
+	console.log(`remove duplicates: ${newData}`);
 	return newData;
 }
 
@@ -63,39 +97,16 @@ function textFilter(tweets) {
 	return spliceList;
 }
 
+// sorts an array of tweets chronologically
 function sortDate(tweets) {
 	tweets.sort((a, b) => (a.created_at > b.created_at ? 1 : -1));
 	sortedTweets = tweets;
-	console.log(sortedTweets);
+	console.log(`sort tweets${sortedTweets}`);
 	return sortedTweets;
 }
 
-async function refreshTweets() {
-	// feel free to use a more complicated heuristics like in-place-patch, for simplicity, we will clear all tweets and append all tweets back
-	// {@link https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript}
-	while (tweetContainer.firstChild) {
+// deletes all tweets from tweetContainer
+function refreshTweets() {
+	while (tweetContainer.firstChild)
 		tweetContainer.removeChild(tweetContainer.firstChild);
-	}
-}
-
-async function displayTweets() {
-	const res = await getTweets();
-	tweets = res.data.statuses;
-	console.log(tweets);
-	tweets = removeDuplicates(tweets);
-	tweets = textFilter(tweets);
-	tweets = sortDate(tweets);
-	const tweetContainer = document.getElementById("tweet-container");
-	for (tweet of tweets) {
-		const newTweet = userTweetTemplate.content.cloneNode(true).children[0];
-		let pfp = newTweet.querySelector(".tweet-pfp");
-		pfp.src = tweet.user.profile_image_url;
-		let authorName = newTweet.querySelector(".tweet-author-name");
-		authorName.innerText = `${tweet.user.name} `;
-		let tweetHandle = newTweet.querySelector(".tweet-handle");
-		tweetHandle.innerText = `@${tweet.user.screen_name}`;
-		let tweetContent = newTweet.querySelector(".tweet-content");
-		tweetContent.innerText = tweet.text;
-		tweetContainer.appendChild(newTweet);
-	}
 }
