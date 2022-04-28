@@ -1,6 +1,6 @@
 const url =
 	"http://ec2-18-209-247-77.compute-1.amazonaws.com:3000/feed/random?q=weather";
-const tweets = [];
+let tweets=[];
 const dupeSet = new Set();
 let timer;
 let searchString = "";
@@ -37,6 +37,7 @@ stopBtn.addEventListener("click", () => {
 async function getTweets() {
 	try {
 		const res = await axios.get(url);
+		removedDuplicates = removeDuplicates(res.data.statuses);
 		tweets.push(...res.data.statuses);
 	} catch (error) {
 		console.log(error);
@@ -48,8 +49,7 @@ async function getTweets() {
 async function displayTweets() {
 	removeTweets();
 	await getTweets(); // updates the global array of tweets with new tweets
-	let removedDupes = removeDuplicates();
-	let filteredTweets = textFilter(removedDupes);
+	let filteredTweets = textFilter(tweets);
 	let sortedTweets = sortDate(filteredTweets);
 	for (tweet of sortedTweets) {
 		// clone the tweet template and modify attributes
@@ -71,12 +71,13 @@ async function displayTweets() {
 /**
  * @returns {Array} Array of tweets containing the searchString
  */
-function removeDuplicates() {
+function removeDuplicates(data) {
 	let newData = [];
-	for (let i = 0; i < tweets.length; i++) {
-		if (!dupeSet.has(tweets[i].id)) {
-			newData.push(tweets[i]);
-			dupeSet.add(tweets[i].id);
+	console.log(data);
+	for (let i = 0; i < data.length; i++) {
+		if (!dupeSet.has(data[i].id)) {
+			newData.push(data[i]);
+			dupeSet.add(data[i].id);
 		} else {
 			console.log("duplicate, nuke time");
 		}
