@@ -1,6 +1,7 @@
 const url =
 	"http://ec2-18-209-247-77.compute-1.amazonaws.com:3000/feed/random?q=weather";
 const tweets = [];
+const dupeSet = new Set();
 let timer;
 let searchString = "";
 
@@ -42,15 +43,15 @@ async function getTweets() {
 	}
 }
 
-// should first remove all tweets, i.e refreshTweets()
+// should first remove all tweets, i.e removeTweets()
 // for all tweets that match that query, create a tweet and display
 async function displayTweets() {
-	refreshTweets();
-	await getTweets();
-	removeDuplicates(tweets);
-	textFilter(tweets);
-	sortDate(tweets);
-	for (tweet of tweets) {
+	removeTweets();
+	await getTweets(); // updates the global array of tweets with new tweets
+	let removedDupes = removeDuplicates();
+	let filteredTweets = textFilter(removedDupes);
+	let sortedTweets = sortDate(filteredTweets);
+	for (tweet of sortedTweets) {
 		// clone the tweet template and modify attributes
 		const newTweet = userTweetTemplate.content.cloneNode(true).children[0];
 		let pfp = newTweet.querySelector(".tweet-pfp");
@@ -67,52 +68,56 @@ async function displayTweets() {
 	}
 }
 
-//not extensively tested, might have bugs
-function removeDuplicates(tweets) {
-	let tweetIds = [];
+/**
+ * @returns {Array} Array of tweets containing the searchString
+ */
+function removeDuplicates() {
 	let newData = [];
 	for (let i = 0; i < tweets.length; i++) {
-		tweetIds.push(tweets[i].id);
-	}
-	for (let i = 0; i < tweets.length; i++) {
-		if (tweetIds.includes(tweets[i].id)) {
+		if (!dupeSet.has(tweets[i].id)) {
 			newData.push(tweets[i]);
+			dupeSet.add(tweets[i].id);
 		} else {
 			console.log("duplicate, nuke time");
-			data.statuses.splice(i, 1);
 		}
 	}
-	console.log(`remove duplicates: ${newData}`);
+	console.log(newData);
 	return newData;
 }
 
-//unique from https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
-function onlyUnique(value, index, self) {
-	return self.indexOf(value) === index;
-}
-
+/**
+ * @returns {Array} Array of tweets containing the searchString
+ */
 function textFilter(tweets) {
 	let spliceList = [];
-	for (let i = 0; i < tweets.length; i++) {
+	for (let i = 0; i < tweets.length; i++)
 		if (tweets[i].text.includes(searchString)) spliceList.push(tweets[i]);
-	}
+	console.log(spliceList);
 	return spliceList;
 }
 
-// sorts an array of tweets chronologically
+/**
+ * Clears all displayed tweets
+ */
 function sortDate(tweets) {
 	tweets.sort((a, b) => (a.created_at > b.created_at ? 1 : -1));
 	sortedTweets = tweets;
-	console.log(`sort tweets${sortedTweets}`);
 	return sortedTweets;
 }
 
-// deletes all tweets from tweetContainer
-function refreshTweets() {
+/**
+ * Clears all displayed tweets
+ */
+function removeTweets() {
 	while (tweetContainer.firstChild)
 		tweetContainer.removeChild(tweetContainer.firstChild);
 }
 
+/**
+ * Returns a properly formatted date
+ * @param {string} date
+ * @returns {string}
+ */
 function cleanDate(date) {
 	let new_date = moment(date).format("MMM Do YY");
 	if (new_date[5] === "s") new_date = new_date.slice(0, 5);
