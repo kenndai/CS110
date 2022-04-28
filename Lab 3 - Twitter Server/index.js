@@ -59,6 +59,8 @@ async function displayTweets() {
 		authorName.innerText = `${tweet.user.name} `;
 		let tweetHandle = newTweet.querySelector(".tweet-handle");
 		tweetHandle.innerText = `@${tweet.user.screen_name}`;
+		let tweetDate = newTweet.querySelector(".tweet-date");
+		tweetDate.innerText = ` ${cleanDate(tweet.created_at)}`;
 		let tweetContent = newTweet.querySelector(".tweet-content");
 		tweetContent.innerText = tweet.text;
 		tweetContainer.appendChild(newTweet);
@@ -109,4 +111,11 @@ function sortDate(tweets) {
 function refreshTweets() {
 	while (tweetContainer.firstChild)
 		tweetContainer.removeChild(tweetContainer.firstChild);
+}
+
+function cleanDate(date) {
+	let new_date = moment(date).format("MMM Do YY");
+	if (new_date[5] === "s") new_date = new_date.slice(0, 5);
+	else if (new_date[6] === "t") new_date = new_date.slice(0, 6);
+	return new_date;
 }
