@@ -1,6 +1,6 @@
 const url =
 	"http://ec2-18-209-247-77.compute-1.amazonaws.com:3000/feed/random?q=weather";
-let tweets=[];
+const tweets = [];
 const dupeSet = new Set();
 let timer;
 let searchString = "";
@@ -32,23 +32,28 @@ stopBtn.addEventListener("click", () => {
 	console.log("cleared interval");
 });
 
-// uses axios to fetch tweets
-// pushes fetched tweets into global tweets array
+/**
+ * Makes a GET request using axios and removes duplicates from the tweets
+ * new tweets are appended to global tweets array
+ */
 async function getTweets() {
 	try {
 		const res = await axios.get(url);
 		removedDuplicates = removeDuplicates(res.data.statuses);
-		tweets.push(...res.data.statuses);
+		tweets.push(...removedDuplicates);
 	} catch (error) {
 		console.log(error);
 	}
 }
 
-// should first remove all tweets, i.e removeTweets()
-// for all tweets that match that query, create a tweet and display
+/**
+ * Removes currently displayed tweets and updates the global array of tweets with new, non-duplicate tweets
+ * filters global array of tweets by search strings and sorts the array chronologically
+ * iterates over remaining tweets and displays them
+ */
 async function displayTweets() {
 	removeTweets();
-	await getTweets(); // updates the global array of tweets with new tweets
+	await getTweets(); //
 	let filteredTweets = textFilter(tweets);
 	let sortedTweets = sortDate(filteredTweets);
 	for (tweet of sortedTweets) {
@@ -69,6 +74,9 @@ async function displayTweets() {
 }
 
 /**
+ * Iterates over an array of tweets, if dupeSet does not contain a matching id, add id into dupeSet
+ * and add tweet to array to be returned
+ * @param {Array} data
  * @returns {Array} Array of tweets containing the searchString
  */
 function removeDuplicates(data) {
@@ -87,6 +95,8 @@ function removeDuplicates(data) {
 }
 
 /**
+ * Iterates over an array of tweets and returns tweets containing the search string
+ * @param {Array} tweets
  * @returns {Array} Array of tweets containing the searchString
  */
 function textFilter(tweets) {
@@ -98,7 +108,8 @@ function textFilter(tweets) {
 }
 
 /**
- * Clears all displayed tweets
+ * @param {Array} tweets
+ * @returns {Array} Array of tweets sorted in chronological order
  */
 function sortDate(tweets) {
 	tweets.sort((a, b) => (a.created_at > b.created_at ? 1 : -1));
