@@ -1,0 +1,41 @@
+.arrows {
+	width: 20px;
+	height: 20px;
+	text-align: center;
+}
+
+.voting {
+	display: flex;
+	flex-direction: column;
+}
+
+.post-container {
+	width: 550px;
+	border: 1px black solid;
+	margin: auto;
+	flex-direction: row;
+}
+
+.post-title {
+	padding-left: 10px;
+	margin: 5px;
+}
+
+.post {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	padding-bottom: 10px;
+}
+
+.post-form {
+	width: 500px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	padding: 10px 0px;
+}
+
+.align-right {
+	text-align: right;
+}
