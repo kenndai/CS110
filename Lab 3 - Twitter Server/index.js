@@ -14,13 +14,18 @@ const stopBtn = document.getElementById("stop-poll");
 
 // sets searchString according to user input
 searchForm.addEventListener("submit", e => {
+	clearInterval(timer);
 	e.preventDefault();
 	searchString = searchBar.value.trim().toLowerCase();
 	console.log(searchString);
+	displayTweets();
+	timer = setInterval(displayTweets, 10000);
+
 });
 
 // call displayTweets then begin 10sec polling interval
 startBtn.addEventListener("click", () => {
+	clearInterval(timer);
 	displayTweets();
 	timer = setInterval(displayTweets, 10000);
 	console.log("set interval");
