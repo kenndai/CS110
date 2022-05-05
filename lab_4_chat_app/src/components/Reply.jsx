@@ -1,11 +1,10 @@
 import React from "react";
 import Form from "./Form";
 
-function Post() {
+function Reply() {
 	return (
 		<>
 			<div className="post-container">
-				<h3 className="post-title">New Post</h3>
 				<div className="post">
 					<Form />
 				</div>
@@ -14,4 +13,4 @@ function Post() {
 	);
 }
 
-export default Post;
+export default Reply;
