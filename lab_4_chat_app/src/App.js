@@ -2,6 +2,8 @@ import { useState, useMemo } from "react";
 import "./App.css";
 import Post from "./components/Post";
 import Reply from "./components/Reply";
+import ChatLog from "./components/ChatLog";
+import Chat from "./components/Chat";
 import { PostContext } from "./contexts/PostContext";
 
 function App() {
@@ -15,6 +17,8 @@ function App() {
 		<>
 			<h3>Hi Please Vote</h3>
 			<PostContext.Provider value={providerPosts}>
+				<ChatLog />
+				<Chat />
 				<Post />
 				<Reply />
 			</PostContext.Provider>
