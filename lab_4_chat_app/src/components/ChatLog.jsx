@@ -1,7 +1,11 @@
 import React from "react";
 
 function ChatLog() {
-	return <div>ChatLog</div>;
+	return (
+		<>
+			<div></div>
+		</>
+	);
 }
 
 export default ChatLog;
