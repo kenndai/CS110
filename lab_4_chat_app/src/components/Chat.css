@@ -1,0 +1,12 @@
+.name{
+    color:rgb(55, 55, 208);
+    font-family:sans-serif;
+    font-size: 70%;
+    box-shadow: 0 0 0 .1pt grey;
+    max-width: fit-content;
+}
+.textContent{
+    box-shadow: 0 0 0 .1pt grey;
+    max-width: fit-content;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
