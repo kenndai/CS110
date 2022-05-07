@@ -18,7 +18,7 @@ function App() {
 			<h3>Hi Please Vote</h3>
 			<PostContext.Provider value={providerPosts}>
 				<ChatLog />
-				<Chat />
+				<Chat  />
 				<Post />
 				<Reply />
 			</PostContext.Provider>

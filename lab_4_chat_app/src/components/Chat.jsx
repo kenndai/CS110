@@ -1,9 +1,13 @@
 import React from "react";
+// import App from '../App'
+// import { useState, useMemo } from "react";
 
-// displays name and the textContents from a submitted post or reply
-// also has a Votes component on the side
-function Chat() {
-	return <div>Chat</div>;
+
+function Chat({name, textContent}) {
+	return (<div>
+		Chat
+				<div>{name}: {textContent} <br/></div>
+		</div>)
 }
 
 export default Chat;

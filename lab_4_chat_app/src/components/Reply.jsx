@@ -7,7 +7,7 @@ function Reply() {
 	return (
 		<div className="reply-container">
 			<button className="reply-btn" onClick={() => setShow(!show)}>
-				<i class="far fa-comment-alt"></i> Reply
+				<i className="far fa-comment-alt"></i> Reply
 			</button>
 			<div className="post">{show ? <Form /> : null}</div>
 		</div>
