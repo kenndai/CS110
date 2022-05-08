@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './Votes.css'
 
 function Vote() {
 	const [votes, setVotes] = useState(0);

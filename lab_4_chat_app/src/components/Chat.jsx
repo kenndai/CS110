@@ -4,11 +4,16 @@ import React from "react";
 import './Chat.css'
 
 function Chat({name, textContent}) {
-	return (<div>
-		Chat
-				<div className = "name"><b>{name}</b> </div> 
-				<div className = "textContent"> {textContent} <br/></div>
-		</div>)
+	if({name}){
+		return (<div>
+			Chat
+					<div className = "name"><b>{name}</b> </div> 
+					<div className = "textContent"> {textContent} <br/></div>
+			</div>)
+	}
+	else{
+		return;
+	}
 }
 
 export default Chat;

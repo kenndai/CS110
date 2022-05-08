@@ -5,6 +5,7 @@ import Reply from "./components/Reply";
 import ChatLog from "./components/ChatLog";
 import Chat from "./components/Chat";
 import { PostContext } from "./contexts/PostContext";
+import Vote from "./components/Votes";
 
 function App() {
 	const [posts, setPosts] = useState([]);
@@ -16,18 +17,18 @@ function App() {
 	return (
 		<>
 			<h3>Hi Please Vote</h3>
-			<PostContext.Provider value={providerPosts}>
+			<PostContext.Provider value={providerPosts} >
 				<Post />
 				<ChatLog />
-				<Chat  />
-
+				{/* <Chat  /> */}
+				{/* <Vote /> */}
 				<Reply />
 			</PostContext.Provider>
-			<ul>
+			{/* <ul>
 				{posts.map(post => (
 					<li>{`${post.name}: ${post.textContent}`}</li>
 				))}
-			</ul>
+			</ul> */}
 		</>
 	);
 }

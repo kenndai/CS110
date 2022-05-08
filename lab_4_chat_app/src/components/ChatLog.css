@@ -1,0 +1,13 @@
+.chatLog{
+    margin: auto;
+    margin-left:30px;
+    /* padding:px; */
+    width: 125%;
+
+}
+.chatContainer{
+    display:flex;
+    flex-direction: row;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
