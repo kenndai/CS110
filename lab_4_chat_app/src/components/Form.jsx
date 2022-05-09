@@ -1,16 +1,16 @@
 import React, { useContext, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { ThreadContext } from "../contexts/ThreadContext";
-import { PostContext } from "../contexts/PostContext";
 
-function Form({ type }) {
+function Form({ type, handleReply }) {
 	const [formData, setFormData] = useState({
+		id: "",
 		name: "",
 		textContent: "",
 	});
-	const { name, textContent } = formData;
+	const { id, name, textContent } = formData;
 
 	const { threads, setThreads } = useContext(ThreadContext);
-	const { posts, setPosts } = useContext(PostContext);
 
 	const onChange = e => {
 		setFormData(prevState => ({
@@ -21,13 +21,14 @@ function Form({ type }) {
 
 	const onSubmit = e => {
 		e.preventDefault();
+		setFormData(prevState => ({ ...prevState, [id]: uuidv4() }));
+
 		if (type === "post") {
-			console.log("From post");
+			// adds a post as a thread causing the page to rerender
 			setThreads([...threads, formData]);
-			setPosts([...posts, formData]);
+			handleReply(formData);
 		} else if (type === "reply") {
-			console.log("From reply");
-			setPosts([...posts, formData]);
+			handleReply(formData);
 		}
 	};
 

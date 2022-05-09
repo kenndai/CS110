@@ -4,7 +4,7 @@ import Thread from "./components/Thread";
 import { ThreadContext } from "./contexts/ThreadContext";
 
 function App() {
-	const [threads, setThreads] = useState([]);
+	const [threads, setThreads] = useState([{}]);
 	const providerThreads = useMemo(
 		() => ({ threads, setThreads }),
 		[threads, setThreads]
@@ -14,12 +14,9 @@ function App() {
 		<>
 			<h3>Hi Please Post</h3>
 			<ThreadContext.Provider value={providerThreads}>
-				<Thread type={"first"} />
-				{threads.length > 0
-					? threads.map(thread => {
-							return <Thread {...thread} />;
-					  })
-					: null}
+				{threads.map(thread => (
+					<Thread key={thread.id} {...thread} />
+				))}
 			</ThreadContext.Provider>
 		</>
 	);

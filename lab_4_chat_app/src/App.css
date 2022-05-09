@@ -14,7 +14,14 @@ body {
 	flex-direction: column;
 }
 
+.Thread {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 .Chat {
+	width: 1200px;
 	border: 1px black solid;
 	margin: 10px 0px;
 }
@@ -74,7 +81,6 @@ textarea {
 .post-container {
 	width: 550px;
 	border: 1px black solid;
-	margin: auto;
 	display: flex;
 	flex-direction: column;
 }

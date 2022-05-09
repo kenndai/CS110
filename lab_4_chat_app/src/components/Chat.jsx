@@ -2,18 +2,20 @@ import "./Chat.css";
 import Reply from "./Reply";
 import Votes from "./Votes";
 
-function Chat({ name, textContent }) {
+function Chat(props) {
+	console.log("Chat");
+	console.log(props.name, props.textContent);
 	return (
 		<div className="Chat">
 			Chat
 			<div className="name">
-				<b>{name}</b>{" "}
+				<b>{props.name}</b>{" "}
 			</div>
 			<div className="textContent">
 				{" "}
-				{textContent} <br />
+				{props.textContent} <br />
 			</div>
-			<Reply />
+			<Reply handleReply={props.handleReply} />
 			<Votes />
 		</div>
 	);
