@@ -1,14 +1,16 @@
 import React, { useContext, useState } from "react";
+import { ThreadContext } from "../contexts/ThreadContext";
 import { PostContext } from "../contexts/PostContext";
 
-function Form() {
+function Form({ type }) {
 	const [formData, setFormData] = useState({
 		name: "",
 		textContent: "",
 	});
-	const { posts, setPosts } = useContext(PostContext);
-
 	const { name, textContent } = formData;
+
+	const { threads, setThreads } = useContext(ThreadContext);
+	const { posts, setPosts } = useContext(PostContext);
 
 	const onChange = e => {
 		setFormData(prevState => ({
@@ -19,7 +21,14 @@ function Form() {
 
 	const onSubmit = e => {
 		e.preventDefault();
-		setPosts([...posts, formData]);
+		if (type === "post") {
+			console.log("From post");
+			setThreads([...threads, formData]);
+			setPosts([...posts, formData]);
+		} else if (type === "reply") {
+			console.log("From reply");
+			setPosts([...posts, formData]);
+		}
 	};
 
 	return (

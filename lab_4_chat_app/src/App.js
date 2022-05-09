@@ -1,33 +1,28 @@
 import { useState, useMemo } from "react";
 import "./App.css";
-import Post from "./components/Post";
-import Reply from "./components/Reply";
-import ChatLog from "./components/ChatLog";
-import Chat from "./components/Chat";
-import { PostContext } from "./contexts/PostContext";
+import Thread from "./components/Thread";
+import { ThreadContext } from "./contexts/ThreadContext";
 
 function App() {
-	const [posts, setPosts] = useState([]);
-	const providerPosts = useMemo(
-		() => ({ posts, setPosts }),
-		[posts, setPosts]
+	// Central "Post" form on top
+	// useState for "Threads"
+	const [threads, setThreads] = useState([]);
+	const providerThreads = useMemo(
+		() => ({ threads, setThreads }),
+		[threads, setThreads]
 	);
 
 	return (
 		<>
-			<h3>Hi Please Vote</h3>
-			<PostContext.Provider value={providerPosts}>
-				<Post />
-				<ChatLog />
-				<Chat  />
-
-				<Reply />
-			</PostContext.Provider>
-			<ul>
-				{posts.map(post => (
-					<li>{`${post.name}: ${post.textContent}`}</li>
-				))}
-			</ul>
+			<h3>Hi Please Post</h3>
+			<ThreadContext.Provider value={providerThreads}>
+				<Thread type={"first"} />
+				{threads.length > 0
+					? threads.map(thread => {
+							return <Thread {...thread} />;
+					  })
+					: null}
+			</ThreadContext.Provider>
 		</>
 	);
 }

@@ -9,7 +9,7 @@ function Reply() {
 			<button className="reply-btn" onClick={() => setShow(!show)}>
 				<i className="far fa-comment-alt"></i> Reply
 			</button>
-			<div className="post">{show ? <Form /> : null}</div>
+			<div className="post">{show ? <Form type={"reply"} /> : null}</div>
 		</div>
 	);
 }

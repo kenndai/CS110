@@ -6,7 +6,7 @@ function Post() {
 		<>
 			<div className="post-container">
 				<h3 className="post-title">New Post</h3>
-				<Form />
+				<Form type={"post"} />
 			</div>
 		</>
 	);
