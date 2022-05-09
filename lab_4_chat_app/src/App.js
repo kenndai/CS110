@@ -4,8 +4,6 @@ import Thread from "./components/Thread";
 import { ThreadContext } from "./contexts/ThreadContext";
 
 function App() {
-	// Central "Post" form on top
-	// useState for "Threads"
 	const [threads, setThreads] = useState([]);
 	const providerThreads = useMemo(
 		() => ({ threads, setThreads }),
