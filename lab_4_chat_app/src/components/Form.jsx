@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { ThreadContext } from "../contexts/ThreadContext";
+import { PostContext } from "../contexts/PostContext";
 
-function Form({ type, handleReply }) {
+function Form({ type }) {
 	const [formData, setFormData] = useState({
 		id: "",
 		name: "",
@@ -11,6 +12,7 @@ function Form({ type, handleReply }) {
 	const { id, name, textContent } = formData;
 
 	const { threads, setThreads } = useContext(ThreadContext);
+	const { posts, setPosts } = useContext(PostContext);
 
 	const onChange = e => {
 		setFormData(prevState => ({
@@ -26,9 +28,9 @@ function Form({ type, handleReply }) {
 		if (type === "post") {
 			// adds a post as a thread causing the page to rerender
 			setThreads([...threads, formData]);
-			handleReply(formData);
+			setPosts([...posts, formData]);
 		} else if (type === "reply") {
-			handleReply(formData);
+			setPosts([...posts, formData]);
 		}
 	};
 

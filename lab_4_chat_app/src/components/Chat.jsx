@@ -3,8 +3,6 @@ import Reply from "./Reply";
 import Votes from "./Votes";
 
 function Chat(props) {
-	console.log("Chat");
-	console.log(props.name, props.textContent);
 	return (
 		<div className="Chat">
 			Chat
@@ -15,7 +13,7 @@ function Chat(props) {
 				{" "}
 				{props.textContent} <br />
 			</div>
-			<Reply handleReply={props.handleReply} />
+			<Reply />
 			<Votes />
 		</div>
 	);

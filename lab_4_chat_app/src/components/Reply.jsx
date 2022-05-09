@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Form from "./Form";
 
-function Reply({ handleReply }) {
+function Reply() {
 	const [show, setShow] = useState(false);
 
 	return (
@@ -9,11 +9,7 @@ function Reply({ handleReply }) {
 			<button className="reply-btn" onClick={() => setShow(!show)}>
 				<i className="far fa-comment-alt"></i> Reply
 			</button>
-			<div className="post">
-				{show ? (
-					<Form type={"reply"} handleReply={handleReply} />
-				) : null}
-			</div>
+			<div className="post">{show ? <Form type={"reply"} /> : null}</div>
 		</div>
 	);
 }
