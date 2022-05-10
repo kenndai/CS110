@@ -4,6 +4,7 @@
     font-size: 70%;
     /* box-shadow: 0 0 0 .1pt grey; */
     width: flex;
+    max-width: 100px;
 }
 .textContent{
     flex-direction:row;

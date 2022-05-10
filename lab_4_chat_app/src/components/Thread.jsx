@@ -14,7 +14,7 @@ function Thread(props) {
 
 	return (
 		<div className="Thread">
-			<h3>Thread</h3>
+			{/* <h3>Thread</h3> */}
 			{/* Display post for the first thread */}
 			<PostContext.Provider value={providerPosts}>
 				{Object.keys(props).length === 0 ? <Post /> : null}

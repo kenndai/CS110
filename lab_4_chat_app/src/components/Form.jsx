@@ -49,6 +49,7 @@ function Form({ type }) {
 					placeholder="name"
 					value={name}
 					onChange={onChange}
+					required = "required"
 				/>
 				<textarea
 					id="textContent"
@@ -57,6 +58,7 @@ function Form({ type }) {
 					placeholder="text content"
 					onChange={onChange}
 					rows={5}
+					required = "required"
 				/>
 				<div className="align-right">
 					<button type="submit" className="submit-btn">
