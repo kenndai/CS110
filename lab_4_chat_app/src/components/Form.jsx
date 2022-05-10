@@ -29,11 +29,14 @@ function Form({ type }) {
 
 		if (type === "post") {
 			// adds a post as a thread causing the page to rerender
+			newData.level = 1;
 			setThreads([...threads, newData]);
 			setPosts([...posts, newData]);
-		} else if (type === "reply") {
+		}else if (type === "reply") {
+			newData.level=2;
 			setPosts([...posts, newData]);
 		}
+
 	};
 
 	return (

@@ -3,11 +3,11 @@ import Reply from "./Reply";
 import Votes from "./Votes";
 
 function Chat(props) {
-	console.log(props.id);
+	console.log(props.level);
 	return (
-		<div className="Chat">
+		<div className={`Chat level${props.level}`}>
 			{/* Chat */}
-			<div className="name">
+			<div className= "name"> 
 				<b>{props.name}</b>{" "}
 			</div>
 			<div className="textContent">
