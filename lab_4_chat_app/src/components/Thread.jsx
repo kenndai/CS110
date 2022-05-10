@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import Chat from "./Chat";
 import Post from "./Post";
 import { PostContext } from "../contexts/PostContext";
+import "./Thread.css";
 
 function Thread(props) {
 	// every thread should have their own array of posts
@@ -26,8 +27,8 @@ function Thread(props) {
 				{/* Loop through each Thread's array of posts and render them as Chats */}
 				{Object.keys(props).length > 0 && posts.length > 0
 					? posts.map(post => {
-							return <Chat key={post.id} {...post} />;
-					  })
+							return <Chat key={post.id} {...post} />
+					})
 					: null}
 			</PostContext.Provider>
 		</div>
