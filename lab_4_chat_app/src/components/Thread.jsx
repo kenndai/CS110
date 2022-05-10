@@ -20,9 +20,9 @@ function Thread(props) {
 			<PostContext.Provider value={providerPosts}>
 				{Object.keys(props).length === 0 ? <Post /> : null}
 				{/* Take the first post and make it into a chat*/}
-				{Object.keys(props).length > 0 && posts.length === 0 ? (
-					<Chat key={props.id} {...props} />
-				) : null}
+				{Object.keys(props).length > 0 && posts.length === 0
+					? setPosts([...posts, props])
+					: null}
 				{/* Loop through each Thread's array of posts and render them as Chats */}
 				{Object.keys(props).length > 0 && posts.length > 0
 					? posts.map(post => {

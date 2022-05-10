@@ -10,7 +10,7 @@ function Form({ type }) {
 		textContent: "",
 	});
 
-	const { id, name, textContent } = formData;
+	const { name, textContent } = formData;
 
 	const { threads, setThreads } = useContext(ThreadContext);
 	const { posts, setPosts } = useContext(PostContext);
