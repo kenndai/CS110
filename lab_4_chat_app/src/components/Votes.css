@@ -1,6 +1,9 @@
-.arrows{
-    height:30%;
-    width: 30%;
-    text-align: center;
-    
+/* .arrows{
+
+} */
+.voting{
+    display: flex;
+    text-align:center;
+    /* margin-top:-50px; */
+    align-self: flex-end;
 }

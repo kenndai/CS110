@@ -3,9 +3,10 @@ import Reply from "./Reply";
 import Votes from "./Votes";
 
 function Chat(props) {
+	console.log(props.id);
 	return (
 		<div className="Chat">
-			Chat
+			{/* Chat */}
 			<div className="name">
 				<b>{props.name}</b>{" "}
 			</div>
@@ -13,8 +14,8 @@ function Chat(props) {
 				{" "}
 				{props.textContent} <br />
 			</div>
-			<Reply />
-			<Votes />
+				<Reply />
+				<Votes />
 		</div>
 	);
 }

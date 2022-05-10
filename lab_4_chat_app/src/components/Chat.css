@@ -2,12 +2,27 @@
     color:rgb(55, 55, 208);
     font-family:sans-serif;
     font-size: 70%;
-    box-shadow: 0 0 0 .1pt grey;
-    width: 700px;
-    height: flex;
+    /* box-shadow: 0 0 0 .1pt grey; */
+    width: flex;
 }
 .textContent{
-    box-shadow: 0 0 0 .1pt grey;
-    max-width: fit-content;
+    flex-direction:row;
+    flex-wrap:wrap;
+    /* box-shadow: 0 0 0 .1pt grey; */
+    width: 3500px;
+    max-height: 300px;
+
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    word-wrap:break-word;
+    table-layout: fixed;
+    overflow-y: auto;
+    text-align: justify;
+}
+.Chat{
+    display:flex;
+    flex-wrap:nowrap;
+}
+.reply-container{
+    align-self: flex-start;
+    
 }

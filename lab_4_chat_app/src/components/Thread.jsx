@@ -12,8 +12,6 @@ function Thread(props) {
 		[posts, setPosts]
 	);
 
-	console.log(props);
-
 	return (
 		<div className="Thread">
 			<h3>Thread</h3>
