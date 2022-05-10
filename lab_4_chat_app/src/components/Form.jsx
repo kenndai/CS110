@@ -9,6 +9,7 @@ function Form({ type }) {
 		name: "",
 		textContent: "",
 	});
+
 	const { id, name, textContent } = formData;
 
 	const { threads, setThreads } = useContext(ThreadContext);
@@ -23,14 +24,15 @@ function Form({ type }) {
 
 	const onSubmit = e => {
 		e.preventDefault();
-		setFormData(prevState => ({ ...prevState, [id]: uuidv4() }));
+		const newData = { ...formData };
+		newData.id = uuidv4();
 
 		if (type === "post") {
 			// adds a post as a thread causing the page to rerender
-			setThreads([...threads, formData]);
-			setPosts([...posts, formData]);
+			setThreads([...threads, newData]);
+			setPosts([...posts, newData]);
 		} else if (type === "reply") {
-			setPosts([...posts, formData]);
+			setPosts([...posts, newData]);
 		}
 	};
 
