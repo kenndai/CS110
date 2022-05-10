@@ -7,3 +7,22 @@
     /* margin-top:-50px; */
     align-self: flex-end;
 }
+.up{
+    background-image:url(./uparrow.png);
+    background-size:cover;
+    background-position:center;
+    width:20px;
+    height:20px;
+    border:none;
+    background-color: white;
+}
+.down{
+    background-image:url(./uparrow.png);
+    background-size:cover;
+    background-position:center;
+    width:20px;
+    height:20px;
+    border:none;
+    background-color: white;
+    transform:rotate(180deg);
+}

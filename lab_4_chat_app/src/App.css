@@ -2,12 +2,12 @@ body {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
 		"Helvetica Neue";
 }
-
+/* 
 .arrows {
 	width: 20px;
 	height: 20px;
 	text-align: center;
-}
+} */
 
 .voting {
 	display: flex;
@@ -90,8 +90,12 @@ textarea {
 .reply-container {
 	width: 550px;
 	margin: auto;
+	border:none;
 }
-
+.reply-btn{
+	border:none;
+	margin-top:100px;
+}
 .align-right {
 	text-align: right;
 }
