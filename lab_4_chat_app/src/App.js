@@ -12,7 +12,7 @@ function App() {
 
 	return (
 		<>
-			<h3>Hi Please Post</h3>
+			{/* <h3>Hi Please Post</h3> */}
 			<ThreadContext.Provider value={providerThreads}>
 				{threads.map(thread => (
 					<Thread key={thread.id} {...thread} />
