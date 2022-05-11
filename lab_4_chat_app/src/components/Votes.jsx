@@ -7,13 +7,9 @@ function Vote() {
 	return (
 		<>
 			<div className="voting">
-				<button className="arrows" onClick={() => setVotes(votes + 1)}>
-					&uarr;
-				</button>
+				<button className="up" onClick={() => setVotes(votes + 1)} alt = "up arrow"> </button>
 				<span>{votes}</span>
-				<button className="arrows" onClick={() => setVotes(votes - 1)}>
-					&darr;
-				</button>
+				<button className="down" onClick={() => setVotes(votes - 1)}> </button>
 			</div>
 		</>
 	);
