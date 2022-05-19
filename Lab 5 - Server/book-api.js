@@ -25,6 +25,24 @@ app.post("/book", (req, res) => {
 	res.send("Book is added to the database");
 });
 
+app.get("/book/:isbn", (req, res) => {
+	const { isbn } = req.params;
+	const foundBook = books.find(book => book.isbn === isbn);
+	res.json(foundBook);
+});
+
+app.post("/book/:isbn", (req, res) => {
+	const isbn = req.params.isbn;
+	const newBook = req.body;
+
+	for (let i = 0; i < books.length; i++) {
+		let book = books[i];
+		if (book.isbn === isbn) books[i] = newBook;
+	}
+
+	res.send("Book is edited");
+});
+
 app.listen(port, () => {
 	console.log(`App is listening on ${port}`);
 });
