@@ -51,6 +51,7 @@ app.delete("/book/:isbn", (req, res) => {
 	const { isbn } = req.params;
 	books = books.filter(book => book.isbn !== isbn);
 	res.send("Book was deleted");
+	res.redirect("/books");
 });
 
 app.listen(port, () => {
