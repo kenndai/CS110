@@ -12,10 +12,19 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// get all books
 app.get("/books", (req, res) => {
 	res.json(books);
 });
 
+// get a book by isbn
+app.get("/book/:isbn", (req, res) => {
+	const { isbn } = req.params;
+	const foundBook = books.find(book => book.isbn === isbn);
+	res.json(foundBook);
+});
+
+// create new book
 app.post("/book", (req, res) => {
 	const book = req.body;
 
@@ -25,12 +34,7 @@ app.post("/book", (req, res) => {
 	res.send("Book is added to the database");
 });
 
-app.get("/book/:isbn", (req, res) => {
-	const { isbn } = req.params;
-	const foundBook = books.find(book => book.isbn === isbn);
-	res.json(foundBook);
-});
-
+// update a book
 app.post("/book/:isbn", (req, res) => {
 	const isbn = req.params.isbn;
 	const newBook = req.body;
@@ -41,6 +45,12 @@ app.post("/book/:isbn", (req, res) => {
 	}
 
 	res.send("Book is edited");
+});
+
+app.delete("/book/:isbn", (req, res) => {
+	const { isbn } = req.params;
+	books = books.filter(book => book.isbn !== isbn);
+	res.send("Book was deleted");
 });
 
 app.listen(port, () => {
