@@ -1,5 +1,4 @@
-{
-    "books":[
+[
         {
             "isbn":"9781593279509",
             "title":"Eloquent JavaScript, Third Edition",
@@ -88,5 +87,4 @@
             "description":"Get the most out of this foundational reference and improve the productivity of your software teams. This open access book collects the wisdom of the 2017 \"Dagstuhl\" seminar on productivity in software engineering, a meeting of community leaders, who came together with the goal of rethinking traditional definitions and measures of productivity.",
             "website":"https://doi.org/10.1007/978-1-4842-4221-6"
         }
-    ]
-}
+]
