@@ -5,14 +5,20 @@ const chatSchema = new mongoose.Schema(
 		chatroomID: {
 			type: String,
 			required: [true, "Chatroom ID needed"],
+			unique: true,
+		},
+		chatroomName: {
+			type: String,
+			required: [true, "Chatroom name needed"],
+			unique: true,
 		},
 		author: {
 			type: String,
-			require: [true, "Please enter the author of the chat"],
+			require: [true, "Please enter the author of the message"],
 		},
-		text: {
+		message: {
 			type: String,
-			required: [true, "Text content needed"],
+			required: [true, "Message content needed"],
 		},
 	},
 	{ timestamps: true }

@@ -39,8 +39,6 @@ app.set("view engine", "hbs");
 app.get("/", homeHandler.getHome);
 app.use("/room", require("./routes/roomRoutes"));
 
-// NOTE: This is the sample server.js code we provided, feel free to change the structures
-
 app.listen(port, () =>
 	console.log(`Server listening on http://localhost:${port}`)
 );

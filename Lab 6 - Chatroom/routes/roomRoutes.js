@@ -6,7 +6,7 @@ const {
 	createRoom,
 } = require("../controllers/roomController");
 
-router.route("/:roomname").get(getRoom).post(createMessage);
 router.post("/create", createRoom);
+router.route("/:roomname").get(getRoom).post(createMessage);
 
 module.exports = router;
