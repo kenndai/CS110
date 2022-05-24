@@ -3,10 +3,16 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const hbs = require("express-handlebars");
 const path = require("path");
-const { homeHandler, roomHandler } = require("./controllers/home.js");
+const homeHandler = require("./controllers/home.js");
+const roomHandler = require("./controllers/room.js");
+const colors = require("colors");
+const connectDB = require("./config/db");
 
-const app = express();
+// connects to mongoDB
+connectDB();
+
 const port = 8080;
+const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
