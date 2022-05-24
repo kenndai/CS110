@@ -3,9 +3,9 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const hbs = require("express-handlebars");
 const path = require("path");
-const homeHandler = require("./controllers/home.js");
-const roomHandler = require("./controllers/room.js");
+const homeHandler = require("./controllers/homeController.js");
 const colors = require("colors");
+const dotenv = require("dotenv").config();
 const connectDB = require("./config/db");
 
 // connects to mongoDB
@@ -36,9 +36,8 @@ app.set("view engine", "hbs");
 
 // TODO: Add server side code
 
-// Create controller handlers to handle requests at each endpoint
 app.get("/", homeHandler.getHome);
-app.get("/:roomName", roomHandler.getRoom);
+app.use("/room", require("./routes/roomRoutes"));
 
 // NOTE: This is the sample server.js code we provided, feel free to change the structures
 
