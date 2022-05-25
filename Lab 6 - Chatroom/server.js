@@ -1,15 +1,12 @@
 // import dependencies
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const hbs = require('express-handlebars');
-const path = require('path');
-const roomIdGenerator = require('./util/roomIdGenerator.js');
-const mongoose = require('mongoose');
-const config = require('config');
-const Room = require("./models/Rooms");
+const express = require("express");
+const cookieParser = require("cookie-parser");
+const hbs = require("express-handlebars");
+const path = require("path");
+const mongoose = require("mongoose");
+const config = require("config");
 // import handlers
-const homeHandler = require('./controllers/homeController.js');
-const roomHandler = require('./controllers/roomController.js');
+const homeHandler = require("./controllers/homeController.js");
 const colors = require("colors");
 const dotenv = require("dotenv").config();
 const connectDB = require("./config/db");
@@ -38,38 +35,13 @@ app.engine(
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
-const db = config.get('mongoURI');
-mongoose.connect(db,
-    err=>{
-        if(err)throw err;
-        console.group("Connected to MongoDB");
-    });
 // set up stylesheets route
 
 // TODO: Add server side code
 
-//createroom
-app.post("/create", function (req,res){
-    const newRoom = new Room ({
-        name:req.body.roomName,
-        id:roomIdGenerator.roomIdGenerator()
-    })
-    newRoom.save().then(console.log("Room has been added"))
-        .catch(err =>console.log("Error when creating room"))
-})
-app.get('/getRoom', function (req,res){
-    Room.find().lean().then(item =>{
-        res.json(item);
-    })
-})
-// Create controller handlers to handle requests at each endpoint
-app.get('/', homeHandler.getHome);
-app.get('/:roomName', roomHandler.getRoom);
+app.get("/", homeHandler.getHome);
+app.use("/room", require("./routes/roomRoutes"));
 
-//create endpoint - to create a new room in the database
-
-//getRoom -return json of all rooms
-
-// NOTE: This is the sample server.js code we provided, feel free to change the structures
-
-app.listen(port, () => console.log(`Server listening on http://localhost:${port}`));
+app.listen(port, () =>
+	console.log(`Server listening on http://localhost:${port}`)
+);

@@ -2,6 +2,7 @@
 
 const roomGenerator = require("../util/roomIdGenerator.js");
 const Chat = require("../models/chatModel");
+const Room = require("../models/roomModel");
 
 // @desc    Get all chats from a certain room
 // @route   GET /room/:roomName
@@ -13,8 +14,7 @@ const getRoom = async (req, res) => {
 	// 	newRoomId: roomGenerator.roomIdGenerator(),
 	// });
 
-	// TODO: Get messages by chatroomName, i.e. chats within a room, sort messages chronologically
-	const messages = await Chat.find({ chatroomName: req.params.roomname });
+	// TODO: Find if a collection with roomName exists
 
 	res.status(200).json({
 		message: `Get all messages from room ${req.params.roomname}`,
@@ -43,10 +43,14 @@ const createRoom = async (req, res) => {
 		throw new Error("yikes");
 	}
 
+	const newRoom = await Room.create({
+		roomName,
+		roomID: roomGenerator.roomIdGenerator(),
+	});
+
 	res.status(200).json({
 		message: "Created room",
-		roomName,
-		roomID: `${roomGenerator.roomIdGenerator()}`,
+		newRoom,
 	});
 };
 
