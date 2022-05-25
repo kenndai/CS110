@@ -4,13 +4,7 @@ const chatSchema = new mongoose.Schema(
 	{
 		chatroomID: {
 			type: String,
-			// required: [true, "Chatroom ID needed"],
-			// unique: true,
-		},
-		chatroomName: {
-			type: String,
-			required: [true, "Chatroom name needed"],
-			// unique: true,
+			required: [true, "Chatroom ID needed"],
 		},
 		author: {
 			type: String,

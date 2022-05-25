@@ -6,10 +6,8 @@ const path = require("path");
 const colors = require("colors");
 const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
-const config = require("config");
-// import handlers
-const homeHandler = require("./controllers/homeController.js");
 const connectDB = require("./config/db");
+const config = require("config");
 
 // connects to mongoDB
 connectDB();
@@ -39,7 +37,7 @@ app.set("view engine", "hbs");
 
 // TODO: Add server side code
 
-app.get("/", homeHandler.getHome);
+app.use("/", require("./routes/homeRoutes"));
 app.use("/room", require("./routes/roomRoutes"));
 
 app.listen(port, () =>
