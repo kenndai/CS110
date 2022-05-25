@@ -3,12 +3,12 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const hbs = require("express-handlebars");
 const path = require("path");
+const colors = require("colors");
+const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
 const config = require("config");
 // import handlers
 const homeHandler = require("./controllers/homeController.js");
-const colors = require("colors");
-const dotenv = require("dotenv").config();
 const connectDB = require("./config/db");
 
 // connects to mongoDB

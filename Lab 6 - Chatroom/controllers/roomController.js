@@ -14,10 +14,12 @@ const getRoom = async (req, res) => {
 	// 	newRoomId: roomGenerator.roomIdGenerator(),
 	// });
 
-	// TODO: Find if a collection with roomName exists
+	const roomName = req.params.roomname;
+	const chats = await Chat.find({ chatroomName: roomName });
 
 	res.status(200).json({
 		message: `Get all messages from room ${req.params.roomname}`,
+		chats,
 	});
 };
 
@@ -26,8 +28,10 @@ const getRoom = async (req, res) => {
 // @access  Public
 const createMessage = async (req, res) => {
 	// TODO: Add conditional to check if chatroom exists
+	// get corresponding id to roomname?
+	const chatroomName = req.params.roomname;
 
-	const newChat = await Chat.create({ ...req.body });
+	const newChat = await Chat.create({ ...req.body, chatroomName });
 
 	res.status(200).json({ newChat });
 };
@@ -36,7 +40,9 @@ const createMessage = async (req, res) => {
 // @route   POST /room/create
 // @access  Public
 const createRoom = async (req, res) => {
-	const roomName = req.body.roomName;
+	const chatroomName = req.body.roomName;
+
+	const foundRoom = await Room.findOne({});
 
 	if (!roomName) {
 		res.status(400);
