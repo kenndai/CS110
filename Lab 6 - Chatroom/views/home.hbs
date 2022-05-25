@@ -1,14 +1,15 @@
 <h1> Home </h1>
 <p>This is the {{ title }} page</p>
 
-
-{{#if isAvailable}}
 <ul id = "list-template">
-    {{#each  rooms}}
-        <li><a href {{this.name}}>{{this.name}}</a></li>
-    {{/each}}
 </ul>
-{{/if}}
+
+{{!-- {{#if isAvailable}} --}}
+            {{!-- <li><a href {{this.name}}>{{this.name}}</a></li> --}}
+
+    {{!-- {{#each  rooms}} --}}
+    {{!-- {{/each}}
+{{/if}} --}}
 
 <form action = "/create" method = POST>
 <input type = "text" name = "roomName" placeholder="Please enter a room name"/>
@@ -40,7 +41,7 @@
                     document.getElementById('list-template').appendChild(li);
                 }
             }).catch(err => {
-                console.log("Error when rendering rooms", err); 
+                console.log("Error when rendering rooms from home.hbs", err); 
             })
         },5000)
     })
