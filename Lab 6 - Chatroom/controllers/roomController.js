@@ -11,7 +11,6 @@ const getRoom = async (req, res) => {
 	const roomID = req.params.roomID;
 	const foundRoom = await Room.findOne({ roomID });
 	const chats = await Chat.find({ chatroomID: roomID }).lean();
-	console.log(chats);
 	res.render("room", { chats, roomID, roomName: foundRoom.roomName });
 };
 
