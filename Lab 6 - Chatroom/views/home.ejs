@@ -10,8 +10,18 @@
 		<h1>Home</h1>
 		<ul>
 			<% for (let room of rooms) { %>
-			<li><%= room.roomName %></li>
+			<li> <a href = "/room/<%=room.roomID%>"><%= room.roomName %></a> </li>
 			<% } %>
+			<form action = "/room/create" id = "createForm" method = "post">
+				Club Name: <input type="text" id = "test" name = "roomName" value = ""><br><br>
+				<button>Submit</button>
+			 </form>
 		</ul>
 	</body>
 </html>
+
+<script type="text/javascript">
+    setTimeout(function () { 
+      location.reload(); 
+    }, 10 * 1000);
+</script>

@@ -31,6 +31,7 @@ const createMessage = async (req, res) => {
 // @route   POST /room/create
 // @access  Public
 const createRoom = async (req, res) => {
+	console.log(req.body);
 	const roomName = req.body.roomName;
 
 	const foundRoom = await Room.findOne({});
@@ -45,10 +46,13 @@ const createRoom = async (req, res) => {
 		roomID: roomGenerator.roomIdGenerator(),
 	});
 
-	res.status(200).json({
-		message: "Created room",
-		newRoom,
-	});
+	// res.status(200).json({
+	// 	message: "Created room",
+	// 	newRoom,
+	// });
+	// res.status(200).json({
+	// 	newRoom,
+	// });
 };
 
 module.exports = {
