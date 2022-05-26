@@ -17,20 +17,31 @@
 			</li>
 			<% } %>
 		</ul>
-		<form action = "/room/<%=roomID%>" id = "createForm" method = "post">
-			name:<input type="text" id = "filler1" name = "author" value = ""><br><br>
-			message: <input type="text" id = "filler2" name = "message" value = ""><br><br>
-			<button onclick= "refreshPage()" >Submit</button>
-		 </form>
+		<form action="/room/<%=roomID%>" id="createForm" method="post">
+			name:<input
+				type="text"
+				id="filler1"
+				name="author"
+				value=""
+			/><br /><br />
+			message:
+			<input
+				type="text"
+				id="filler2"
+				name="message"
+				value=""
+			/><br /><br />
+			<button onclick="refreshPage()">Submit</button>
+		</form>
 	</body>
 	<script>
-		function refreshPage(){
+		function refreshPage() {
 			window.location.reload();
 		}
 	</script>
 	<script type="text/javascript">
 		setInterval(() => {
 			location.reload();
-		}, 5000);
+		}, 12500);
 	</script>
 </html>

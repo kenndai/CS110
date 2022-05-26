@@ -10,8 +10,8 @@ const Room = require("../models/roomModel");
 const getRoom = async (req, res) => {
 	const roomID = req.params.roomID;
 	const foundRoom = await Room.findOne({ roomID });
-	const chats = await Chat.find().lean();
-
+	const chats = await Chat.find({ chatroomID: roomID }).lean();
+	console.log(chats);
 	res.render("room", { chats, roomID, roomName: foundRoom.roomName });
 };
 
@@ -22,7 +22,7 @@ const createMessage = async (req, res) => {
 	// TODO: Add conditional to check if chatroom exists
 	// get corresponding id to roomname?
 	const chatroomID = req.params.roomID;
-	const newChat = await Chat.create({ ...req.body, chatroomID });
+	await Chat.create({ ...req.body, chatroomID });
 
 	// res.status(200).json({ newChat });
 };
