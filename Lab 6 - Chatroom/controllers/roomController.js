@@ -24,7 +24,7 @@ const createMessage = async (req, res) => {
 	const chatroomID = req.params.roomID;
 	const newChat = await Chat.create({ ...req.body, chatroomID });
 
-	res.status(200).json({ newChat });
+	// res.status(200).json({ newChat });
 };
 
 // @desc    Creates a room with a roomname and roomid
