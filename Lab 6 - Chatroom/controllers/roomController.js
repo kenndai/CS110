@@ -8,19 +8,11 @@ const Room = require("../models/roomModel");
 // @route   GET /room/:roomID
 // @access  Public
 const getRoom = async (req, res) => {
-	// res.render("room", {
-	// 	title: "chatroom",
-	// 	roomName: req.params.roomName,
-	// 	newRoomId: roomGenerator.roomIdGenerator(),
-	// });
+	const roomID = req.params.roomID;
+	const foundRoom = await Room.findOne({ roomID });
+	const chats = await Chat.find().lean();
 
-	const roomID = req.params.roomid;
-	const chats = await Chat.find({ chatroomID: roomID });
-
-	res.status(200).json({
-		message: `Get all messages from room ${req.params.roomname}`,
-		chats,
-	});
+	res.render("room", { chats, roomID, roomName: foundRoom.roomName });
 };
 
 // @desc    Add a chat to a certain room
@@ -29,8 +21,7 @@ const getRoom = async (req, res) => {
 const createMessage = async (req, res) => {
 	// TODO: Add conditional to check if chatroom exists
 	// get corresponding id to roomname?
-	const chatroomID = req.params.roomname;
-
+	const chatroomID = req.params.roomID;
 	const newChat = await Chat.create({ ...req.body, chatroomID });
 
 	res.status(200).json({ newChat });
@@ -40,7 +31,7 @@ const createMessage = async (req, res) => {
 // @route   POST /room/create
 // @access  Public
 const createRoom = async (req, res) => {
-	const chatroomName = req.body.roomName;
+	const roomName = req.body.roomName;
 
 	const foundRoom = await Room.findOne({});
 
