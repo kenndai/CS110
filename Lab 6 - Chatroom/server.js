@@ -22,16 +22,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // If you choose not to use handlebars as template engine, you can safely delete the following part and use your own way to render content
 // view engine setup
-app.engine(
-	"hbs",
-	hbs({
-		extname: "hbs",
-		defaultLayout: "layout",
-		layoutsDir: __dirname + "/views/layouts/",
-	})
-);
+
 app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "hbs");
+app.set("view engine", "ejs");
 
 // set up stylesheets route
 

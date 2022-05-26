@@ -17,8 +17,8 @@ function getHome(request, response){
 // @access  Public
 const getHome = async (req, res) => {
 	const rooms = await Room.find().lean();
-	res.status(200).json(rooms);
-	// res.render("home", { title: "home" });
+	// res.status(200).json(rooms);
+	res.render("home", { title: "home", rooms, isAvailable: true });
 };
 
 module.exports = {
